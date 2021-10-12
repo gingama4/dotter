@@ -1,0 +1,47 @@
+dotfiles_path = "~/dotfiles"
+log = true
+log_path = "./dotter.log"
+
+[variable.user_name]
+var = ""
+
+[variable.user_email]
+var = ""
+
+[[dotfile]]
+name = "vim"  
+
+  [dotfile.step.1]
+  src = "vim/vimrc"
+  target = "~/.vimrc"
+  type = "ln"
+
+  [dotfile.step.2]
+  target = "~/.vim"
+  type = "mkdir"
+  
+  [dotfile.step.3]
+  src = "vim/plugin.vim"
+  target = "~/.vim/plugin.vim"
+  type = "ln"
+
+  [dotfile.step.4]
+  src = "vim/rc"
+  target = "~/.vim/rc"
+  type = "ln"
+
+[[dotfile]]
+name = "git"  
+
+  [dotfile.step.1]
+  src = ".gitconfig"
+  target = "~/.gitconfig"
+  type = "cp"
+
+  [dotfile.step.2]
+  type = "cmd"
+  cmd = "git config --global user.name {{ .user_name }}"
+  
+  [dotfile.step.3]
+  type = "cmd"
+  cmd = "git config --global user.email {{ .user_email }}"
