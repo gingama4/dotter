@@ -1,0 +1,24 @@
+dotfiles_path = "~/dotfiles"
+log = true
+log_path = "./dotter.log"
+
+[variable.test_string]
+var = "testing"
+
+[[dotfile]]
+name = "vim"  
+
+  [[dotfile.step]]
+  name = "link vimrc"
+  src = "vim/vimrc"
+  target = "~/.vimrc"
+  type = "ln"
+  force = true
+
+[[dotfile]]
+name = "git"  
+
+  [[dotfile.step]]
+  src = ".gitconfig"
+  target = "~/.gitconfig"
+  type = "cp"

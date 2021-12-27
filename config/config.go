@@ -10,11 +10,14 @@ type Config struct {
 }
 
 type Dotfile struct {
-	Name  string          `toml:"name"`
-	Steps map[string]Step `toml:"step"`
+	Name  string `toml:"name"`
+	Steps []Step `toml:"step"`
 }
 
 type Step struct {
+	Name   string `toml:"name"`
+	Force  bool   `toml:"force"`
+	Backup bool   `toml:"backup"`
 	Src    string `toml:"src"`
 	Target string `toml:"target"`
 	Type   string `toml:"type"`

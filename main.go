@@ -2,9 +2,10 @@ package main
 
 import (
 	"flag"
-	"fmt"
 
 	"github.com/gingama4/dotter/config"
+	"github.com/gingama4/dotter/handler"
+	"github.com/gingama4/dotter/logger"
 )
 
 var onlyExec string
@@ -18,6 +19,13 @@ func init() {
 func main() {
 	flag.Parse()
 
+	logger.InitLog(true)
+	logger.SetLevel(logger.DEBUG)
+
 	c := config.LoadConfig(configPath)
-	fmt.Printf("%+v\n", c)
+	h := handler.Handler{
+		Config:   c,
+		OnlyExec: onlyExec,
+	}
+	h.Run()
 }
