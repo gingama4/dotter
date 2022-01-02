@@ -28,8 +28,6 @@ func CreateLink(s *config.Step) error {
 
 	oldname := s.Src
 
-	return nil
-
 	err := os.Symlink(oldname, newname)
 	if err != nil {
 		return err
@@ -70,7 +68,6 @@ func overwriteLink(s *config.Step) error {
 	target := expandPath(s.Target)
 
 	logger.Log().Debug("exec command: ln %s %s %s", cs, src, target)
-	return nil
 	err := exec.Command("ln", cs, src, target).Run()
 	if err != nil {
 		return err
