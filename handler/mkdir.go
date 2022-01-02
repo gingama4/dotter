@@ -1,7 +1,17 @@
 package handler
 
-import "github.com/gingama4/dotter/config"
+import (
+	"os"
+
+	"github.com/gingama4/dotter/config"
+)
 
 func CreateDir(s *config.Step) error {
+
+	err := os.MkdirAll(s.Target, os.ModePerm)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }

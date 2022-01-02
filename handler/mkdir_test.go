@@ -17,7 +17,7 @@ func TestCreateDir(t *testing.T) {
 		Force:  false,
 		Backup: false,
 		Src:    "",
-		Target: fmt.Sprintf("%s/test-create-dir", tmp.Dir),
+		Target: fmt.Sprintf("%s/test-create-dir/subdir", tmp.Dir),
 		Type:   "mkdir",
 		Cmd:    "",
 	}
