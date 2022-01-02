@@ -2,51 +2,15 @@ package handler
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"testing"
 
 	"github.com/gingama4/dotter/config"
-	"github.com/gingama4/dotter/logger"
 )
-
-type Temp struct {
-	Dir  string
-	Name string
-}
-
-func createTemp(t *testing.T) *Temp {
-	tmp := t.TempDir()
-
-	tmpFile, err := ioutil.TempFile(tmp, "testfile-")
-	if err != nil {
-		t.Fatalf("\nfatal: %v", err)
-	}
-
-	temp := Temp{
-		Dir:  tmp,
-		Name: tmpFile.Name(),
-	}
-
-	return &temp
-}
-
-func (tp *Temp) Remove(t *testing.T) {
-	err := os.RemoveAll(tp.Dir)
-	if err != nil {
-		t.Fatalf("\nfatal: %v", err)
-	}
-}
-
-func TestMain(m *testing.M) {
-	logger.InitLog(false)
-
-	m.Run()
-}
 
 func TestCreateLink(t *testing.T) {
 	tmp := createTemp(t)
-	defer tmp.Remove(t)
+	defer tmp.remove(t)
 
 	source := tmp.Name
 
@@ -173,7 +137,7 @@ func TestCreateLink(t *testing.T) {
 
 func TestCreateLink_srcNotExists(t *testing.T) {
 	tmp := createTemp(t)
-	defer tmp.Remove(t)
+	defer tmp.remove(t)
 
 	source := fmt.Sprintf("%s/not_exists", tmp.Dir)
 
@@ -200,7 +164,7 @@ func TestCreateLink_srcNotExists(t *testing.T) {
 
 func TestCreateLink_AlreadyExists(t *testing.T) {
 	tmp := createTemp(t)
-	defer tmp.Remove(t)
+	defer tmp.remove(t)
 
 	source := tmp.Name
 
