@@ -16,10 +16,7 @@ type Temp struct {
 }
 
 func createTemp(t *testing.T) *Temp {
-	tmp, err := ioutil.TempDir("", "dotter-test-")
-	if err != nil {
-		t.Fatalf("\nfatal: \n%v", err)
-	}
+	tmp := t.TempDir()
 
 	tmpFile, err := ioutil.TempFile(tmp, "testfile-")
 	if err != nil {
@@ -229,6 +226,6 @@ func TestCreateLink_AlreadyExists(t *testing.T) {
 
 	_, err = os.Lstat(s.Target)
 	if err != nil {
-		t.Errorf("\nLink found: \n%v", err)
+		t.Errorf("\nLink not found: \n%v", err)
 	}
 }
