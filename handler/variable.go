@@ -23,11 +23,11 @@ func replaceVariable(v map[string]config.Variable, s string) (string, error) {
 func ReplaceVariable(c *config.Config) {
 	v := c.Variables
 
-	for _, d := range c.Dotfiles {
-		for _, s := range d.Steps {
-			s.Src, _ = replaceVariable(v, s.Src)
-			s.Target, _ = replaceVariable(v, s.Target)
-			s.Cmd, _ = replaceVariable(v, s.Cmd)
+	for i, d := range c.Dotfiles {
+		for j, s := range d.Steps {
+			c.Dotfiles[i].Steps[j].Src, _ = replaceVariable(v, s.Src)
+			c.Dotfiles[i].Steps[j].Target, _ = replaceVariable(v, s.Target)
+			c.Dotfiles[i].Steps[j].Cmd, _ = replaceVariable(v, s.Cmd)
 		}
 	}
 
