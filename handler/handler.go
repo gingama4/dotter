@@ -11,6 +11,7 @@ type Handler struct {
 }
 
 func (h *Handler) Run() {
+	ReplaceVariable(h.Config)
 	for _, d := range h.Config.Dotfiles {
 		if !h.isTarget(d.Name) {
 			continue
