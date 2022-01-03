@@ -43,10 +43,13 @@ func handler(d *config.Dotfile) {
 			CreateLink(&s)
 		case "mkdir":
 			logger.Log().StepUp().AddField("target", s.Target).Debug("mkdir")
+			CreateDir(&s)
 		case "cp":
 			logger.Log().StepUp().AddField("src", s.Src).AddField("target", s.Target).Debug("cp")
+			Copy(&s)
 		case "cmd":
 			logger.Log().StepUp().AddField("cmd", s.Cmd).Debug("cmd")
+			ExecCmd(&s)
 		default:
 			logger.Log().StepUp().Warn("Non defined type")
 		}
