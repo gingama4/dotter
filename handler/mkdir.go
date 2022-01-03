@@ -8,7 +8,9 @@ import (
 
 func CreateDir(s *config.Step) error {
 
-	err := os.MkdirAll(s.Target, os.ModePerm)
+	et := expandPath(s.Target)
+
+	err := os.MkdirAll(et, os.ModePerm)
 	if err != nil {
 		return err
 	}
